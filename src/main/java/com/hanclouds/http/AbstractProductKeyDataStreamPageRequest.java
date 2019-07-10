@@ -1,19 +1,22 @@
 package com.hanclouds.http;
 
 import com.hanclouds.exception.HanCloudsClientException;
+import com.hanclouds.http.AbstractHttpResponse;
+import com.hanclouds.http.AbstractProductKeyPageRequest;
+import com.hanclouds.util.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
- * @author zhangzhan
+ * @author czl
  * @version 1.0
- * @date 2018/6/25 10:20
+ * @date 2018/7/13 17:24
  */
-public abstract class AbstractProductKeyDataStreamRequest<T extends AbstractHttpResponse> extends AbstractProductKeyRequest<T> {
+public abstract class AbstractProductKeyDataStreamPageRequest<T extends AbstractHttpResponse> extends AbstractProductKeyPageRequest<T> {
     protected String dataName;
 
-    public AbstractProductKeyDataStreamRequest(String url) {
+    public AbstractProductKeyDataStreamPageRequest(String url) {
         super(url);
     }
 
@@ -26,12 +29,13 @@ public abstract class AbstractProductKeyDataStreamRequest<T extends AbstractHttp
     }
 
     @Override
-    public void validate()  throws HanCloudsClientException {
+    public void validate() throws HanCloudsClientException {
         super.validate();
 
-        if (this.dataName == null || this.dataName.isEmpty()) {
+        if (StringUtils.isBlank(this.dataName)) {
             throw new HanCloudsClientException("dataName can not null or empty");
         }
+
         try {
             dataName = URLEncoder.encode(dataName, "UTF-8");
         } catch (UnsupportedEncodingException e) {

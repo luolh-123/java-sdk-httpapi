@@ -98,8 +98,15 @@ public class BaseHttpResponse {
         if (data == null || data.length == 0) {
             return null;
         }
-
-        ErrorMessage errorMessage = JSON.parseObject(data, ErrorMessage.class);
+        ErrorMessage errorMessage;
+        try
+        {
+            errorMessage = JSON.parseObject(data, ErrorMessage.class);
+        }catch(Exception ex){
+            errorMessage = new ErrorMessage();
+            errorMessage.setCode("400");
+            errorMessage.setMessage(new String(data));
+        }
         return errorMessage;
     }
 }

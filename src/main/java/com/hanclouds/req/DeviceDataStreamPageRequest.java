@@ -1,5 +1,6 @@
 package com.hanclouds.req;
 
+import com.hanclouds.http.AbstractDeviceKeyPageRequest;
 import com.hanclouds.http.AbstractDeviceKeyRequest;
 import com.hanclouds.http.HttpMethodEnum;
 import com.hanclouds.resp.DataStreamPageResponse;
@@ -9,7 +10,7 @@ import com.hanclouds.resp.DataStreamPageResponse;
  * @version 1.0
  * @date 2018/6/8 15:06
  */
-public class DeviceDataStreamPageRequest extends AbstractDeviceKeyRequest<DataStreamPageResponse> {
+public class DeviceDataStreamPageRequest extends AbstractDeviceKeyPageRequest<DataStreamPageResponse> {
 
     public DeviceDataStreamPageRequest() {
         super("/devices/{deviceKey}/datastreams");

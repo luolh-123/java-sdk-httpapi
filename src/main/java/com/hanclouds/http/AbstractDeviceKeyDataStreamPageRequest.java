@@ -3,6 +3,9 @@ package com.hanclouds.http;
 import com.hanclouds.exception.HanCloudsClientException;
 import com.hanclouds.util.StringUtils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * @author zhangzhan
  * @version 1.0
@@ -29,6 +32,10 @@ public abstract class AbstractDeviceKeyDataStreamPageRequest<T extends AbstractH
 
         if (StringUtils.isBlank(this.dataName)) {
             throw new HanCloudsClientException("dataName can not null or empty");
+        }
+        try {
+            dataName = URLEncoder.encode(dataName, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
         }
 
         this.setUrl(this.getUrl().replace("{dataName}", this.dataName));
